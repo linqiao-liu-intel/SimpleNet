@@ -35,7 +35,14 @@ class Dataset(data.Dataset):
         cls_names = [folder for folder in os.listdir(data_dir)]
         cls_names.sort()
 
-        cls_to_idx = {cls_name: i for i, cls_name in enumerate(cls_names)}
+        #cls_to_idx = {cls_name: i for i, cls_name in enumerate(cls_names)}
+        cls_to_idx = {}
+        for _, cls_name in enumerate(cls_names):
+            if cls_name == "good":
+                cls_to_idx[cls_name] = 0
+            else:
+                #anamoly
+                cls_to_idx[cls_name] = 1
 
         for root, dirs, filenames in os.walk(data_dir, topdown=False, followlinks=True):
             label = basename(relpath(root, data_dir) if (root != data_dir) else '')

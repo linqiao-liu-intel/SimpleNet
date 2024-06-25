@@ -1,0 +1,10 @@
+--index-url https://download.pytorch.org/whl/cpu
+--extra-index-url https://pypi.org/simple
+torch
+torchvision
+torchaudio
+scikit-learn
+opencv-python>=4.5.5.64
+scipy
+tqdm
+openvino==2023.3.0

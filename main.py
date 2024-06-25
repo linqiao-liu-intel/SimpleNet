@@ -17,9 +17,8 @@ from utils.dataset import Dataset
 
 warnings.filterwarnings("ignore")
 
-data_dir = os.path.join('..', 'Dataset', 'Metal')
+data_dir = os.path.join('..', 'SimpleNet_test', 'metal_nut')
 normalize = transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
-
 
 def load_backbone():
     backbone = nn.resnet18()
@@ -35,7 +34,7 @@ def train(args):
     util.setup_multi_processes()
     # Model
     model = load_backbone()
-    device = torch.device('cuda:0')
+    device = torch.device('cpu')
     filters = 128 * model.fn.expansion + 256 * model.fn.expansion
 
     model = model.to(device)
@@ -122,7 +121,7 @@ def train(args):
 @torch.no_grad()
 def test(args, device=None, model_g=None, model_d=None):
     if device is None:
-        device = torch.device('cuda:0')
+        device = torch.device('cpu')
         model_g = torch.load('./weights/best.pt', device)['model_g'].float()
         model_d = torch.load('./weights/best.pt', device)['model_d'].float()
 
